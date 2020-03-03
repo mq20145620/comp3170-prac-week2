@@ -71,12 +71,16 @@ public class Week2 extends JFrame implements GLEventListener {
 			this.shader = new Shader(vertexShader, fragementShader);
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.exit(1);
 		} catch (GLException e) {
 			e.printStackTrace();
+			System.exit(1);
 		}
 		
+		// create the shape
+		
 		// vertices of a square as (x,y) pairs
-		vertices = new float[] {
+		this.vertices = new float[] {
 				 0.5f,	0.5f,
 				-0.5f,	0.5f,
 				-0.5f, -0.5f,
@@ -105,15 +109,12 @@ public class Week2 extends JFrame implements GLEventListener {
 		GL4 gl = (GL4) GLContext.getCurrentGL();
 
         // clear the colour buffer
-        
 		gl.glClear(GL_COLOR_BUFFER_BIT);		
 
 		// activate the shader
-		
 		this.shader.enable();
 		
-        // connect the vertex buffer to the a_position attribute
-		   
+        // connect the vertex buffer to the a_position attribute		   
 	    this.shader.setAttribute("a_position", vertexBuffer, 2, GL_FLOAT);
 
 	    // write the colour value into the u_colour uniform 
@@ -122,7 +123,6 @@ public class Week2 extends JFrame implements GLEventListener {
         this.shader.setUniform("u_colour", colour);	
 	    
         // draw the shape as a series of lines in a loop
-        
         gl.glDrawArrays(GL_LINE_LOOP, 0, vertices.length / 2);           	
         
 	}

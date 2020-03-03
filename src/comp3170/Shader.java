@@ -165,14 +165,30 @@ public class Shader {
 	}
 
 	/**
-	 * Connect a buffer to a shader attribute
+	 * Set the value of a uniform
 	 * 
-	 * @param attributeName The name of the shader attribute
-	 * @param buffer        The buffer
-	 * @param size          The number of values per item (i.e. 2 for a vec2, 3 for
-	 *                      a vec3 etc)
-	 * @param type          The type of the data in the buffer
-	 * @param gl            The GL context
+	 * @param uniformName
+	 * @param value
+	 */
+	public void setUniform(String uniformName, float value) {
+		GL4 gl = (GL4) GLContext.getCurrentGL();
+		int uniform = getUniform(uniformName);
+		int type = uniformTypes.get(uniformName);
+
+		if (type != GL.GL_FLOAT) {		
+			throw new IllegalArgumentException(
+					String.format("Expected %s got float", typeName(type)));
+		}
+
+		gl.glUniform1f(uniform, value);
+	}
+	
+
+	/**
+	 * Set the value of a uniform
+	 * 
+	 * @param uniformName
+	 * @param value
 	 */
 	public void setUniform(String uniformName, float[] value) {
 		GL4 gl = (GL4) GLContext.getCurrentGL();
@@ -183,12 +199,16 @@ public class Shader {
 		switch (type) {
 		case GL.GL_FLOAT:
 			expectedArgs = 1;
+			break;
 		case GL4.GL_FLOAT_VEC2:
 			expectedArgs = 2;
+			break;
 		case GL4.GL_FLOAT_VEC3:
 			expectedArgs = 3;
+			break;
 		case GL4.GL_FLOAT_VEC4:
 			expectedArgs = 4;
+			break;
 		}
 
 		if (value.length != expectedArgs) {

@@ -118,7 +118,7 @@ public class Week2 extends JFrame implements GLEventListener {
 	    this.shader.setAttribute("a_position", vertexBuffer, 2, GL_FLOAT);
 
 	    // write the colour value into the u_colour uniform 
-	    float[] colour = {1.0f, 1.0f, 1.0f, 1.0f};
+	    float[] colour = {1.0f, 1.0f, 1.0f};
 	    
         this.shader.setUniform("u_colour", colour);	
 	    

@@ -630,7 +630,7 @@ public class Shader {
 			in = new BufferedReader(new FileReader(shaderFile));
 
 			for (String line = in.readLine(); line != null; line = in.readLine()) {
-				source.add(line);
+				source.add(line + "\n");
 			}
 
 		} catch (IOException e) {

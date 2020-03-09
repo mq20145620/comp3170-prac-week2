@@ -13,8 +13,10 @@ import javax.swing.JFrame;
 
 import com.jogamp.opengl.GL4;
 import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLContext;
 import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 
 import comp3170.GLException;
@@ -38,7 +40,9 @@ public class Week2 extends JFrame implements GLEventListener {
 		
 		// create an OpenGL canvas and add this as a listener
 		
-		this.canvas = new GLCanvas();
+		GLProfile profile = GLProfile.get(GLProfile.GL4);		 
+		GLCapabilities capabilities = new GLCapabilities(profile);
+		this.canvas = new GLCanvas(capabilities);
 		this.canvas.addGLEventListener(this);
 		this.add(canvas);
 		
